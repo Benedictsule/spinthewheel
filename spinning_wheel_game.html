@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spinning Wheel game</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="dashboard">Earnings: <span id="earnings">0</span> credits</div>
+<div class="container">
+  <div class="betContainer">
+    <input type="number" id="betAmount" placeholder="Enter bet amount">
+    <input type="number" id="numBets" placeholder="Enter number of bets">
+    <button class="placeBetBtn">Place Bet</button>
+  </div>
+  <div class="spinBtn">Spin</div>
+  <div class="wheel">
+    <span style="--i:0;"></span>
+    <span style="--i:1;"></span>
+    <span style="--i:2;"></span>
+    <span style="--i:3;"></span>
+    <span style="--i:4;"></span>
+    <span style="--i:6;"></span>
+    <span style="--i:7;"></span>
+    <span style="--i:8;"></span>
+    <span style="--i:10;"></span>
+    <span style="--i:11;"></span>
+    <span style="--i:12;"></span>
+    <span style="--i:13;"></span>
+    <span style="--i:14;"></span>
+    <span style="--i:15;"></span>
+    <span style="--i:16;"></span>
+    <span style="--i:17;"></span>
+    <span style="--i:18;"></span>
+    <span style="--i:19;"></span>
+
+    <div class="number">
+      <b style="--i:0;">0</b>
+      <b style="--i:1;">4</b>
+      <b style="--i:2;">1</b>
+      <b style="--i:3;">7</b>
+      <b style="--i:4;">3</b>
+      <b style="--i:5;">10</b>
+      <b style="--i:6;">6</b>
+      <b style="--i:7;">0</b>
+      <b style="--i:8;">2</b>
+      <b style="--i:9;">2</b>
+      <b style="--i:10;">0</b>
+      <b style="--i:11;">2</b>
+      <b style="--i:12;">0</b>
+      <b style="--i:13;">5</b>
+      <b style="--i:14;">0</b>
+      <b style="--i:15;">1.5</b>
+      <b style="--i:16;">2.5</b>
+      <b style="--i:17;">0</b>
+      <b style="--i:18;">1</b>
+      <b style="--i:19;">9</b>
+      <b style="--i:20;">0</b>
+    </div>
+  </div>
+</div>
+<script>
+  let wheel = document.querySelector('.wheel');
+  let spinBtn = document.querySelector('.spinBtn');
+  let placeBetBtn = document.querySelector('.placeBetBtn');
+  let betAmountInput = document.getElementById('betAmount');
+  let numBetsInput = document.getElementById('numBets');
+  let earningsDisplay = document.getElementById('earnings');
+  let spinning = false;
+  let earnings = 0;
+
+  function spinWheel(element) {
+    if (!spinning) {
+      const betAmount = parseInt(betAmountInput.value);
+      const numBets = parseInt(numBetsInput.value);
+
+      if (isNaN(betAmount) || betAmount <= 0 || isNaN(numBets) || numBets <= 0) {
+        alert('Please enter valid bet amount and number of bets.');
+        return;
+      }
+
+      spinning = true;
+      element.style.transition = 'transform 3s cubic-bezier(0.1, 0.9, 0.2, 1)';
+      const randomDegrees = Math.floor(Math.random() * 3600) + 3600; // Randomize spin degrees
+      element.style.transform = `rotate(${randomDegrees}deg)`;
+
+      setTimeout(() => {
+        spinning = false;
+        const selectedSection = Math.floor(randomDegrees % 360 / (360 / 12)); // 12 sections in the wheel
+        const selectedValue = parseInt(element.children[selectedSection].textContent);
+
+        const winningNumber = Math.floor(Math.random() * 12); // Randomize winning number
+        const resultText = (selectedSection === winningNumber) ? `Congratulations! You won ${selectedValue * 2} ₦.` : `Sorry, you lost ${selectedValue} ₦.`;
+
+        alert(resultText); // Display result using alert (you can modify to display in HTML)
+
+        earnings += (selectedSection === winningNumber) ? (betAmount * numBets * selectedValue) : -(betAmount * numBets * selectedValue); // Adjust earnings calculation
+        earningsDisplay.textContent = earnings >= 0 ? `+${earnings} ₦` : `${earnings} ₦`; // Show earnings or losses in Naira
+      }, 3000); // Wait for wheel animation to finish
+    }
+  }
+
+  spinBtn.onclick = function () {
+    spinWheel(wheel); // Spin the wheel
+  };
+
+  placeBetBtn.onclick = function () {
+    spinWheel(wheel); // Spin the wheel when placing a bet
+  };
+</script>
+</body>
+</html>

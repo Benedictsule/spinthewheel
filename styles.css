@@ -1,0 +1,66 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #408EC6, #7A2048, #1E2761);
+}
+
+.game-title {
+  position: absolute;
+  font-size: 80px;
+  font-style: italic;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #6515d4;
+  align-items: center;
+  display: flex;
+  top: 90px;
+  justify-content: center;
+  border-color: gold;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  width: 30px;
+  height: 50px;
+  background: #f43648; /* Change this color to your desired color */
+  z-index: 100000;
+  clip-path: polygon(50% 0%, 65% 50%, 50% 100%, 35% 50%);
+}
+
+.player-button, .bot-button {
+  padding: 20px 40px;
+  font-style: italic;
+  font-size: 35px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 10 0px;
+}
+
+.player-button {
+  background-color: #1cb6ca;
+  color: rgb(255, 255, 255);
+}
+
+.bot-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.or-text {
+  font-size: 50px;
+  margin: 0 10px;
+  color: #333;
+}
