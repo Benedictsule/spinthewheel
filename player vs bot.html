@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Player vs Bot</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="game-title">Spin the Wheel</div>
+  <div class="button-container">
+    <button class="player-button" onclick="choosePlayer()">Play as Player</button>
+    <span class="or-text">or</span>
+    <button class="bot-button" onclick="chooseBot()">Play as Bot</button>
+  </div>
+
+  <script>
+    function choosePlayer() {
+    alert('Player functionality not implemented yet.'); // You can add Player functionality here
+  }
+
+  function chooseBot() {
+    window.location.href = 'spinning_wheel_game.html'; // Redirect to spinning wheel game
+  }
+  </script>
+  <style>
+    /* Media query for screens smaller than 600px */
+    @media (max-width: 600px) {
+      .game-title {
+        font-size: 50px;
+      }
+      .player-button, .bot-button {
+        padding: 15px 30px;
+        font-size: 25px;
+        margin: 5px 0;
+      }
+      .or-text {
+        font-size: 40px;
+      }
+    }
+  </style>
+  
+</body>
+</html>
+
+
+
+
+
+
+
